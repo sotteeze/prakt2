@@ -117,51 +117,6 @@ def wrap_text(text, width):
 text = input("Enter the text: ")
 n = int(input("Enter the width: "))
 print(wrap_text(text, n))
-#--Task 9--
-def text_to_binary(text):
-    binary = ''
-    for char in text:
-        binary += format(ord(char), '08b')
-    return binary
-
-def hide_message(secret_text, cover_text):
-    binary_secret = text_to_binary(secret_text)
-    words = cover_text.split(' ')
-    hidden_text = [words[0]]
-    binary_index = 0
-    for i in range(1, len(words)):
-        if binary_index < len(binary_secret):
-            if binary_secret[binary_index] == '0':
-                hidden_text.append(' ')
-            else:
-                hidden_text.append('  ')
-            binary_index += 1
-        hidden_text.append(words[i])
-    return ''.join(hidden_text)
-
-def decode_message(hidden_text):
-    words = hidden_text.split(' ')
-    binary_message = ''
-    for i in range(1, len(words)):
-        if words[i] == '':
-            binary_message += '0'
-        else:
-            binary_message += '1'
-    secret_text = ''
-    for i in range(0, len(binary_message), 8):
-        byte = binary_message[i:i+8]
-        secret_text += chr(int(byte, 2))
-    return secret_text
-
-if __name__ == "__main__":
-    cover_text = input("Введіть основний текст: ")
-    secret_text = input("Введіть секретне повідомлення: ")
-
-    hidden_text = hide_message(secret_text, cover_text)
-    print("Прихований текст:", hidden_text)
-
-    decoded_message = decode_message(hidden_text)
-    print("Розшифроване повідомлення:", decoded_message)
 #--Task 10--
 def find_magical_vectors(N):
     from itertools import combinations_with_replacement
